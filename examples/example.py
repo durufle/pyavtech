@@ -4,15 +4,23 @@ import logging
 
 VERSION = '1.0'
 
-USAGE = '''example_b: execute the avtech class example b
+USAGE = '''example_a: execute the avtech class example a
 Usage:
-    python example_b.py [options]
+    python example_a.py [options]
 
 Options:
     -h, --help              this help message.
     -v, --version           version info.
     _l, --logging           logging
-    -a, --alias             avtech alias 
+    -a, --alias             avtech alias
+    
+example:
+    python example.py -a LCT_GPIB_AVR_EMFI
+        -> execute script using alias
+        
+    python example.py -a GPIO0::8::INSTR
+        -> execute script using VISA address
+        
 '''
 
 
@@ -45,7 +53,10 @@ def main(argv=None):
         return 1
 
     if alias is None:
-        alias = "LCT_GPIB_AVR_EMFI"
+        sys.stderr.write("device alias or address is mandatory...\n")
+        sys.stderr.write(USAGE+"\n")
+        return 1
+        # alias = "LCT_GPIB_AVR_EMFI"
 
     if log is True:
         logging.basicConfig(level=logging.INFO)
@@ -53,6 +64,14 @@ def main(argv=None):
     device = PyAvr(alias)
 
     if device.is_open:
+        print("Identity     : {0}".format(device.get_identifier))
+        print("Frequency    : {0}".format(device.get_frequency()))
+        print("Width        : {0}".format(device.get_width()))
+        print("Delay        : {0}".format(device.get_delay()))
+        print("Amplitude    : {0}".format(device.get_amplitude()))
+        print("Output       : {0}".format(device.get_output()))
+        print("burst count  : {0}".format(device.get_burst_count()))
+
         # Width command
         print(" Set width to 2000...")
         print(device.set_width(2000))
@@ -88,6 +107,18 @@ def main(argv=None):
         print(" Set Frequency to 2000 mV...")
         device.set_amplitude(2000)
         print(" Amplitude : {0}".format(device.get_amplitude()))
+
+        device.set_amplitude(0)
+        print(" Output : {0}".format(device.get_output()))
+        print(" Set output on...")
+        device.set_output("on")
+        print(" Output : {0}".format(device.get_output()))
+        print(" Set output off...")
+        device.set_output("off")
+        print(" Output : {0}".format(device.get_output()))
+        print(" Set output bad...")
+        device.set_output("bad")
+        
         device.close()
 
 
