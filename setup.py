@@ -4,11 +4,11 @@ from setuptools import find_packages
 setup(name='pyavtech',
       version='0.0.0',
       
-      description='TLV(tag length value) data parser',
+      description='AVTECH Device driver',
       long_description=open('README.md').read(),
       
       classifiers=[
-        'License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)',
+        'License :: OSI Approved ::  Massachusetts Institute of Technology (MIT)',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
         'Topic :: Device driver',
@@ -21,7 +21,7 @@ setup(name='pyavtech',
       author='Laurent Bonnet',
       author_email='laurent.bonnet@ul.com',
       python_requires='>=3.6',
-      license='LGPLv2',
+      license='MIT',
       packages=find_packages(),
       install_requires=['visa'],
       zip_safe=True)
