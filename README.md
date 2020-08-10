@@ -1,5 +1,5 @@
 
-AVTECH Python package
+# AVTECH Python package
 
 This package allow to drive AVTECH pulse generator. 
 
