@@ -37,7 +37,8 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
-    'sphinx_rtd_theme'
+    'sphinx_rtd_theme',
+    'sphinx.ext.intersphinx'
 ]
 
 intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
