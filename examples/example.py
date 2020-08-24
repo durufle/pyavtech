@@ -2,7 +2,7 @@ from pyavtech import PyAvr
 import sys
 import logging
 
-VERSION = '1.0'
+VERSION = '0.1.0'
 
 USAGE = '''example_a: execute the avtech class example a
 Usage:
@@ -11,7 +11,7 @@ Usage:
 Options:
     -h, --help              this help message.
     -v, --version           version info.
-    _l, --logging           logging
+    _l, --logging           enable logging.
     -a, --alias             avtech alias
     
 example:
@@ -56,12 +56,13 @@ def main(argv=None):
         sys.stderr.write("device alias or address is mandatory...\n")
         sys.stderr.write(USAGE+"\n")
         return 1
-        # alias = "LCT_GPIB_AVR_EMFI"
+        alias = "LCT_GPIB_AVR_EMFI_01"
 
     if log is True:
         logging.basicConfig(level=logging.INFO)
 
     device = PyAvr(alias)
+    print("pyavr package version : {0}".format(PyAvr.__version__))
 
     if device.is_open:
         print("Identity     : {0}".format(device.get_identifier))
@@ -120,6 +121,9 @@ def main(argv=None):
         device.set_output("bad")
         
         device.close()
+
+    # try to close againe
+    device.close()
 
 
 if __name__ == '__main__':

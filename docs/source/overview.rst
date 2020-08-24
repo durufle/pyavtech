@@ -16,7 +16,7 @@ This tools relies on:
 
 This is a standard for configuring, programming, and troubleshooting instrumentation systems comprising GPIB, VXI, PXI,
 Serial, Ethernet, and/or USB interfaces.
-Download VISA environment for your system (e.g. KeySight), and install it.
+Download VISA environment for your system (NI-VISA, KeySight), and install it.
 
 See `Keysight <https://www.keysight.com/main/software.jspx?cc=FR&lc=fre&ckey=2175637&nid=-33002.977662&id=2175637/>`_.
 
@@ -88,7 +88,7 @@ Note that package will be used by other people, so stability matters.
 Documentation update
 --------------------
 
-In order to update the documentation, you need :program:`sphinx`.
+In order to update the documentation, you need :program:`sphinx` and `sphinx_rtd_theme` package.
 
 References
 ==========

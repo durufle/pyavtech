@@ -7,6 +7,9 @@ class PyAvr:
     Class to control an AVR device using VISA
 
     """
+    version = "0.0.0"
+    __version__ = version
+
     __output = {
         "0": "off",
         "1": "on"
@@ -19,7 +22,7 @@ class PyAvr:
 
         self.__manager = visa.ResourceManager()
         self.__is_open = False
-        self._logger = logging.getLogger(__name__)
+        self.__logger = logging.getLogger(__name__)
 
         try:
             self.__device = self.__manager.open_resource(alias)
@@ -27,7 +30,7 @@ class PyAvr:
             self.__identifier = self.__device.query('*IDN?').strip("\n")
             self.__is_open = True
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def __get_output_state(self, number):
         """
@@ -51,7 +54,7 @@ class PyAvr:
             if self.__is_open:
                 self.__device.close()
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     @property
     def is_open(self):
@@ -86,7 +89,7 @@ class PyAvr:
                 resp = self.__device.query('output?')
                 return self.__get_output_state(str(resp).strip("\n"))
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def set_output(self, value):
         """
@@ -101,9 +104,9 @@ class PyAvr:
             if self.__is_open and value in ("on", "off"):
                 return self.__device.write('output ' + str(value))
             else:
-                self._logger.warning("Device not open, or bad parameter...")
+                self.__logger.warning("Device not open, or bad parameter...")
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def get_frequency(self):
         """
@@ -130,7 +133,7 @@ class PyAvr:
             if self.__is_open:
                 return self.__device.write('frequency ' + str(value) + ' Hz')
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def get_delay(self):
         """
@@ -142,7 +145,7 @@ class PyAvr:
             if self.__is_open:
                 return self.__device.query('pulse:delay?').strip("\n")
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def set_delay(self, value):
         """
@@ -155,7 +158,7 @@ class PyAvr:
             if self.__is_open:
                 return self.__device.write('pulse:delay ' + str(value) + ' ns')
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def get_width(self):
         """
@@ -167,7 +170,7 @@ class PyAvr:
             if self.__is_open:
                 return self.__device.query('pulse:width?').strip("\n")
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def set_width(self, value):
         """
@@ -180,7 +183,7 @@ class PyAvr:
             if self.__is_open:
                 return self.__device.write('pulse:width ' + str(value) + ' ns')
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def get_amplitude(self):
         """
@@ -192,7 +195,7 @@ class PyAvr:
             if self.__is_open:
                 return self.__device.query('voltage?').strip("\n")
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def set_amplitude(self, value):
         """
@@ -205,7 +208,7 @@ class PyAvr:
             if self.__is_open:
                 return self.__device.write('volt:ampl ' + str(value) + ' mV')
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def get_burst_count(self):
         """
@@ -218,7 +221,7 @@ class PyAvr:
             if self.__is_open:
                 return self.__device.query('pulse:count?').strip("\n")
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 
     def set_burst_count(self, value):
         """
@@ -230,5 +233,5 @@ class PyAvr:
             if self.__is_open:
                 return self.__device.write('pulse:count ' + str(value))
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self.__logger.warning("{}".format(err))
 

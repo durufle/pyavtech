@@ -1,6 +1,7 @@
 __pycache__
-docs/build
 *.pyc
 build
 *egg*
 dist
+.coverage
+htmlcov
