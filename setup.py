@@ -24,4 +24,4 @@ setup(name='pyavtech',
       license='MIT',
       packages=find_packages(),
       install_requires=['PyVISA'],
-      zip_safe=True)
+      zip_safe=False)
