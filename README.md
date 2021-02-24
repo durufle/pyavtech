@@ -5,7 +5,7 @@ This package allow to drive AVTECH pulse generator.
 
 To import the module in your code:
 ```python
-from pyavtech import PyAvr
+from pyavtech.pyavr import PyAvr
 
 ```
 

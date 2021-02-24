@@ -1,12 +1,12 @@
-from pyavtech import PyAvr
+from pyavtech.pyavr import PyAvr
 import sys
 import logging
 
 VERSION = '0.1.0'
 
-USAGE = '''example_a: execute the avtech class example a
+USAGE = '''example: execute the avtech class example script
 Usage:
-    python example_a.py [options]
+    python example.py [options]
 
 Options:
     -h, --help              this help message.
