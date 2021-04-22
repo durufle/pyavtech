@@ -1,3 +1,4 @@
 Sphinx==2.2.1
 sphinx-rtd-theme
-PyVISA
+PyVISA==1.11.3
+
