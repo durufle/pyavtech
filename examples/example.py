@@ -56,7 +56,6 @@ def main(argv=None):
         sys.stderr.write("device alias or address is mandatory...\n")
         sys.stderr.write(USAGE+"\n")
         return 1
-        alias = "LCT_GPIB_AVR_EMFI_01"
 
     if log is True:
         logging.basicConfig(level=logging.INFO)
@@ -122,7 +121,7 @@ def main(argv=None):
         
         device.close()
 
-    # try to close againe
+    # try to close again
     device.close()
 
 

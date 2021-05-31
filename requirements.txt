@@ -1,4 +1,9 @@
-Sphinx==2.2.1
+Sphinx
 sphinx-rtd-theme
-PyVISA==1.11.3
+wheel
+bump2version
+devpi-web
+devpi-client
+PyVISA
+
 

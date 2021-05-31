@@ -6,3 +6,5 @@ dist
 *.bin
 .coverage
 htmlcov
+venv
+.idea

@@ -1,9 +1,12 @@
 default:
-    image: python:3.6
+    image: python:3.8
+
+variables:
+    PIP_DIR: "/root/.pip"
+    PIP_FILE: "/root/.pip/pip.conf"
 
 stages:
     - build
-    - test
     - deploy
 
 before_script:
@@ -11,6 +14,14 @@ before_script:
     - apt-get update -qy
     - apt-get install -y python-dev python-pip
     - apt-get install -y python3-sphinx
+    - 'mkdir $PIP_DIR'
+    - 'touch $PIP_FILE'
+    - 'echo [global] >> $PIP_FILE'
+    - 'echo index-url = http://$DEVPI_HOST:3141/$DEVPI_INDEX/+simple/ >> $PIP_FILE'
+    - 'echo [search] >> $PIP_FILE'
+    - 'echo index = http://$DEVPI_HOST:3141/$DEVPI_INDEX/ >> $PIP_FILE'
+    - 'echo [install] >> $PIP_FILE'
+    - 'echo trusted-host = $DEVPI_HOST >> $PIP_FILE'
     - pip install -r requirements.txt
 
 builds:
@@ -23,11 +34,6 @@ builds:
         paths:
             - ./dist
             - ./build/sphinx/html
-
-test:
-    stage: test
-    script:
-    -  echo "test phase"
 
 production:
     stage: deploy
