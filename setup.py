@@ -33,7 +33,11 @@ setup(name='name',
         'Topic :: Device driver',
         'Intended Audience :: Developers',
       ],
-      
+
+      entry_points={
+          'console_scripts': ['avtech_info = bin.avr_info:main'],
+      },
+
       keywords='avtech',
       
       url='https://git.ul-ts.com/ims-se/hardware-team/pybench/pyavtech',
