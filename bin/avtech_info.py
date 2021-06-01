@@ -4,19 +4,23 @@ import logging
 
 VERSION = '0.1.0'
 
-USAGE = '''avr: Return avr information field
+USAGE = '''
+Return avtech information
+
 Usage:
-    python example.py [options]
+    python avtech_info.py [options]
 
 Options:
     -h, --help              this help message.
     -v, --version           version info.
-    -a, --alias             avtech alias
+    -a, --alias             alias or VISA address
 
 example:
-    python avr_info.py -a GPIO0::8::INSTR
+    python avtech_info.py -a GPIB0::8::INSTR
         -> execute script using VISA address
 
+    python avtech_info.py -a AVTECH
+        -> execute script using an alias name
 '''
 
 
