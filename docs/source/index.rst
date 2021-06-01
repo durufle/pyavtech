@@ -12,6 +12,7 @@ Welcome to PyAvr's documentation!
 
    ./overview.rst
    ./sample.rst
+   ./utils.rst
    ./api.rst
 
 Indices and tables
