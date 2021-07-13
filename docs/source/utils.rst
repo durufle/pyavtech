@@ -7,9 +7,9 @@ avtech_info
 -----------
 This utility return avtech's parameter. It's useful to check if everything is setup properly.
 
-.. code-block::
+.. code-block:: bash
 
-    (venv) avtech_info
+    > avtech_info
 
     device alias or address is mandatory...
 
@@ -30,3 +30,37 @@ This utility return avtech's parameter. It's useful to check if everything is se
         python avtech_info.py -a AVTECH
             -> execute script using an alias name
 
+Example:
+
+.. code-block:: bash
+
+    > avtech_info -a "GPIB0::8::INSTR"
+    > pyavr package version : 0.2.0
+    > Identity     : AVTECH ELECTROSYSTEMS,AVR-3HE-B-PN-BR,SN:13495,v6.2.17OL
+    > Frequency    : 1.0000e+00
+    > Width        : 4.0000e-08
+    > Delay        : 0.0000
+    > Amplitude    : 0.0000
+    > Output       : off
+    > burst count  : 1
+
+    > Process finished with exit code 0
+
+avr_cli
+-------
+This utility is a line-oriented command interpreter given access to a set of command.
+
+list of command:
+
+.. code-block:: bash
+
+    Welcome to the AVR shell.   Type help or ? to list commands.
+
+    avr > ?
+
+    Documented commands (type help <topic>):
+    ========================================
+    amplitude  count  exit       help      output    record  version
+    connect    delay  frequency  identity  playback  space   width
+
+    avr

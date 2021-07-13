@@ -16,16 +16,14 @@ class PyAvr:
     }
 
     def __init__(self, alias):
-        self.__manager = None
         self.__resources = None
         self.__identifier = None
 
-        self.__manager = visa.ResourceManager()
         self.__is_open = False
         self.__logger = logging.getLogger(__name__)
 
         try:
-            self.__device = self.__manager.open_resource(alias)
+            self.__device = visa.ResourceManager().open_resource(alias)
             self.__device.timeout = 1000
             self.__identifier = self.__device.query('*IDN?').strip("\n")
             self.__is_open = True
@@ -47,8 +45,6 @@ class PyAvr:
     def close(self):
         """
         Close the device
-
-        :return:
         """
         try:
             if self.__is_open:
@@ -61,8 +57,8 @@ class PyAvr:
         """
         Return device open flag
 
-        :return:
-        :rtype:
+        :return: open session status
+        :rtype: bool
         """
         return self.__is_open
 
@@ -81,7 +77,7 @@ class PyAvr:
         """
         Get output state
 
-        :return: output state
+        :return: output state ("on" or "off")
         :rtype: str
         """
         try:
@@ -91,18 +87,18 @@ class PyAvr:
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
 
-    def set_output(self, value):
+    def set_output(self, value: str):
         """
         Set output state
 
-        :param value:
-        :type value:
+        :param value: output state ("on", "off")
+        :type value: str
         :return:
         :rtype:
         """
         try:
             if self.__is_open and value in ("on", "off"):
-                return self.__device.write('output ' + str(value))
+                return self.__device.write('output ' + value)
             else:
                 self.__logger.warning("Device not open, or bad parameter...")
         except visa.VisaIOError as err:
@@ -121,11 +117,11 @@ class PyAvr:
         except visa.VisaIOError as err:
             self._logger.warning("{}".format(err))
 
-    def set_frequency(self, value):
+    def set_frequency(self, value: int):
         """
         Set device frequency value
 
-        :param value: frequency value string
+        :param value: frequency value
         :rtype value: int
         :return:
         """
@@ -147,7 +143,7 @@ class PyAvr:
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
 
-    def set_delay(self, value):
+    def set_delay(self, value: int):
         """
         Set device delay value
 
@@ -172,11 +168,11 @@ class PyAvr:
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
 
-    def set_width(self, value):
+    def set_width(self, value: int):
         """
         Set device width value
 
-        :param value: width value string
+        :param value: width value
         :return:
         """
         try:
@@ -223,7 +219,7 @@ class PyAvr:
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
 
-    def set_burst_count(self, value):
+    def set_burst_count(self, value: int):
         """
         Set device burst count value
 
@@ -235,3 +231,27 @@ class PyAvr:
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
 
+    def get_burst_spacing(self):
+        """
+        Return burst spacing time
+
+        :return: burst spacing value in us
+        :rtype: str
+        """
+        try:
+            if self.__is_open:
+                return self.__device.query('pulse:sep?').strip("\n")
+        except visa.VisaIOError as err:
+            self.__logger.warning("{}".format(err))
+
+    def set_burst_spacing(self, value: int):
+        """
+        Set device burst spacing value in us
+
+        :return:
+        """
+        try:
+            if self.__is_open:
+                return self.__device.write('pulse:separation ' + str(value) + ' us')
+        except visa.VisaIOError as err:
+            self.__logger.warning("{}".format(err))

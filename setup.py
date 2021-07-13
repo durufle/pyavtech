@@ -35,7 +35,7 @@ setup(name=name,
       ],
 
       entry_points={
-          'console_scripts': ['avtech_info = bin.avtech_info:main'],
+          'console_scripts': ['avtech_info = bin.avtech_info:main', 'avr_cli = bin.avr_cli:main'],
       },
 
       keywords='avtech',
