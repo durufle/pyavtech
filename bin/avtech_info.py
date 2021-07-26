@@ -1,3 +1,4 @@
+from importlib.metadata import version
 from pyavtech.pyavr import PyAvr
 import sys
 import logging
@@ -55,7 +56,7 @@ def main(argv=None):
         return 1
 
     device = PyAvr(alias)
-    print("pyavr package version : {0}".format(PyAvr.__version__))
+    print("pyavr package version : {0}".format(version("pyavtech")))
 
     if device.is_open:
         print("Identity     : {0}".format(device.get_identifier))

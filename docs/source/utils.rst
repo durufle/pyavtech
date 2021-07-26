@@ -32,7 +32,7 @@ This utility return avtech's parameter. It's useful to check if everything is se
 
 Example:
 
-.. code-block:: bash
+.. code-block:: console
 
     > avtech_info -a "GPIB0::8::INSTR"
     > pyavr package version : 0.2.0
@@ -52,7 +52,7 @@ This utility is a line-oriented command interpreter given access to a set of com
 
 list of command:
 
-.. code-block:: bash
+.. code-block:: console
 
     Welcome to the AVR shell.   Type help or ? to list commands.
 
@@ -63,4 +63,5 @@ list of command:
     amplitude  count  exit       help      output    record  version
     connect    delay  frequency  identity  playback  space   width
 
-    avr
+    avr >
+

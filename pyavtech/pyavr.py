@@ -7,8 +7,6 @@ class PyAvr:
     Class to control an AVR device using VISA
 
     """
-    version = "0.2.0"
-    __version__ = version
 
     __output = {
         "0": "off",
@@ -29,6 +27,10 @@ class PyAvr:
             self.__is_open = True
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
+
+    def __del__(self):
+        """ For safety, disable output"""
+        pass
 
     def __get_output_state(self, number):
         """
