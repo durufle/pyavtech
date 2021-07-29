@@ -30,7 +30,7 @@ class PyAvr:
 
     def __del__(self):
         """ For safety, disable output"""
-        pass
+        self.close()
 
     def __get_output_state(self, number):
         """
@@ -50,7 +50,10 @@ class PyAvr:
         """
         try:
             if self.__is_open:
+                self.set_amplitude(0)
+                self.set_output('off')
                 self.__device.close()
+                self.__is_open = False
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
 

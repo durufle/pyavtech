@@ -1,5 +1,6 @@
 import cmd
 from pyavtech.pyavr import PyAvr
+from importlib.metadata import version
 
 
 class AvrShell(cmd.Cmd):
@@ -12,7 +13,7 @@ class AvrShell(cmd.Cmd):
     def do_version(self, arg):
         """ Get application and package version: version"""
         print('\n'.join(["  Executable    : {0}".format(self.version),
-                         "  Package       : {0}".format(PyAvr.version),
+                         "  Package       : {0}".format(version('pyavtech')),
                          ]))
 
     def do_connect(self, arg):
