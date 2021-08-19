@@ -12,7 +12,7 @@ stages:
 before_script:
     - echo "Initialize environment"
     - apt-get update -qy
-    - apt-get install -y python-dev python-pip
+    - apt-get install -y python-dev python3-pip
     - apt-get install -y python3-sphinx
     - 'mkdir $PIP_DIR'
     - 'touch $PIP_FILE'
