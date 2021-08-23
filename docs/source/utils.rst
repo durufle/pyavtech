@@ -65,3 +65,147 @@ list of command:
 
     avr >
 
+details of commands:
+
+- **connect**
+
+.. code-block:: console
+
+    Welcome to the AVR shell.   Type help or ? to list commands.
+
+    avr > connect  GPIB0::8::INSTR
+    avr > identity
+        Identity        : AVTECH ELECTROSYSTEMS,AVR-3HE-B-PN-BR,SN:13495,v6.2.17OL
+    avr >
+
+- **amplitude**
+
+.. code-block:: console
+
+    Welcome to the AVR shell.   Type help or ? to list commands.
+
+    avr > connect  GPIB0::8::INSTR
+    avr > help amplitude
+     get / set device power in mA: power , power [value]
+    avr > amplitude
+      Amplitude value : 0.0000
+    avr > amplitude 10
+    avr > amplitude
+      Amplitude value : 1.0000e-02
+    avr > amplitude 0
+    avr > amplitude
+      Amplitude value : 0.0000
+    avr >
+
+- **amplitude**
+
+.. code-block:: console
+
+    Welcome to the AVR shell.   Type help or ? to list commands.
+
+    avr > connect  GPIB0::8::INSTR
+    avr > help count
+     get / set device burst count : count , count [value]
+    avr > count
+      Burst count     : 1
+    avr > count 2
+    avr > count
+      Burst count     : 2
+    avr > count 1
+    avr > count
+      Burst count     : 1
+    avr >
+
+- **output**
+
+.. code-block:: console
+
+    Welcome to the AVR shell.   Type help or ? to list commands.
+
+    avr > connect  GPIB0::8::INSTR
+    avr > help output
+     get / set device output: output , output ["on" / "off"]
+    avr > output
+      Output          : off
+    avr > output on
+    avr > output
+      Output          : on
+    avr > output off
+    avr > output
+      Output          : off
+    avr >
+
+- **delay**
+
+.. code-block:: console
+
+    Welcome to the AVR shell.   Type help or ? to list commands.
+
+    avr > connect  GPIB0::8::INSTR
+    avr > help delay
+     get / set device delay (ns): delay , delay [value]
+    avr > delay
+      Delay           : 1.0000e-05
+    avr > delay
+      Delay           : 1.0000e-05
+    avr > delay 0
+    avr > delay
+      Delay           : 0.0000
+    avr > delay 10
+    avr > delay
+      Delay           : 1.0000e-08
+    avr >
+
+- **space**
+
+.. code-block:: console
+
+    Welcome to the AVR shell.   Type help or ? to list commands.
+
+    avr > connect  GPIB0::8::INSTR
+    avr > help space
+     get / set device burst space : space , space [value]
+    avr > space
+      Burst space     : 5.0000e-06
+    avr > space 10
+    avr > space
+      Burst space     : 1.0000e-05
+    avr >
+
+- **width**
+
+.. code-block:: console
+
+    Welcome to the AVR shell.   Type help or ? to list commands.
+
+    avr > connect  GPIB0::8::INSTR
+    avr > help width
+     get / set device width (ns): width , width [value]
+    avr > width
+      Width           : 4.0000e-08
+    avr > width 100
+    avr > width
+      Width           : 1.0000e-07
+    avr > width 40
+    avr > width
+      Width           : 4.0000e-08
+    avr >
+
+- **frequency**
+
+.. code-block:: console
+
+    Welcome to the AVR shell.   Type help or ? to list commands.
+
+    avr > connect  GPIB0::8::INSTR
+    avr > help frequency
+     get / set device frequency (hz): frequency , frequency [value]
+    avr > frequency
+      Frequency       : 1.0000e+00
+    avr > frequency 2
+    avr > frequency
+      Frequency       : 2.0000e+00
+    avr > frequency 1
+    avr > frequency
+      Frequency       : 1.0000e+00
+    avr >

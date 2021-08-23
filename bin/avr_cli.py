@@ -17,7 +17,7 @@ class AvrShell(cmd.Cmd):
                          ]))
 
     def do_connect(self, arg):
-        """ Connection to the device: connect address port """
+        """ Connection to the device: connect [alias / VISA address]"""
         if arg:
             alias = arg
             self.device = PyAvr(alias.upper())
@@ -39,7 +39,7 @@ class AvrShell(cmd.Cmd):
                 print("  Amplitude value : " + self.device.get_amplitude())
 
     def do_frequency(self, arg):
-        """ get / set device frequency: frequency , frequency [value] """
+        """ get / set device frequency (hz): frequency , frequency [value] """
         if self.device:
             if arg:
                 try:
@@ -50,7 +50,7 @@ class AvrShell(cmd.Cmd):
                 print("  Frequency       : " + self.device.get_frequency())
 
     def do_delay(self, arg):
-        """ get / set device delay: delay , delay [value] """
+        """ get / set device delay (ns): delay , delay [value] """
         if self.device:
             if arg:
                 try:
@@ -61,7 +61,7 @@ class AvrShell(cmd.Cmd):
                 print("  Delay           : " + self.device.get_delay())
 
     def do_width(self, arg):
-        """ get / set device width: width , width [value] """
+        """ get / set device width (ns) : width , width [value] """
         if self.device:
             if arg:
                 try:
