@@ -1,5 +1,10 @@
 **unreleased**
 
+**v0.3.0**
+
+- Add avr_cli line command interpreter
+- Update documentations
+
 **v0.2.0**
 
 - Change package architecture
