@@ -35,7 +35,7 @@ setup(name=name,
       ],
 
       entry_points={
-          'console_scripts': ['avtech_info = bin.avtech_info:main'],
+          'console_scripts': ['avtech_info = bin.avtech_info:main', 'avr_cli = bin.avr_cli:main'],
       },
 
       keywords='avtech',
@@ -43,7 +43,7 @@ setup(name=name,
       url='https://git.ul-ts.com/ims-se/hardware-team/pybench/pyavtech',
       author='Laurent Bonnet',
       author_email='laurent.bonnet@ul.com',
-      python_requires='>=3.6',
+      python_requires='>=3.8',
       license='MIT',
       packages=find_packages(),
       install_requires=['PyVISA>=1.11.3'],

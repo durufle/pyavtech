@@ -1,5 +1,5 @@
 import unittest
-from pyavtech import PyAvr
+from pyavtech.pyavr import PyAvr
 
 
 class TestAvrOpen(unittest.TestCase):
