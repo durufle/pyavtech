@@ -1,5 +1,5 @@
 Examples
-========
+********
 
 - Open a session using the VISA address
 

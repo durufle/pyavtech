@@ -1,10 +1,11 @@
 Utils
-=====
+*****
 
 Utils script are installed during package installation process
 
 avtech_info
------------
+===========
+
 This utility return avtech's parameter. It's useful to check if everything is setup properly.
 
 .. code-block:: bash
@@ -47,7 +48,8 @@ Example:
     > Process finished with exit code 0
 
 avr_cli
--------
+=======
+
 This utility is a line-oriented command interpreter given access to a set of command.
 
 list of command:

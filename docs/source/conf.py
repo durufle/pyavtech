@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../../pyavtech'))
 # -- Project information -----------------------------------------------------
 
 project = 'PyAvr'
-copyright = '2019, UL-IMS'
+copyright = '2021, UL-IMS'
 author = 'Laurent Bonnet'
 
 # The full version, including alpha/beta/rc tags
@@ -36,8 +36,6 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
-    'sphinx_rtd_theme',
-    'sphinx.ext.intersphinx'
 ]
 
 intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
@@ -56,21 +54,13 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 # html_theme = 'classic'
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {
-    "display_version": True,
-    # Toc options
-    'collapse_navigation': True,
-    'sticky_navigation': True,
-    'navigation_depth': 4,
-    'includehidden': True,
-    'titles_only': False
-}
+html_theme_options = {}
 
 # UL Logo
 html_logo = './_images/Ul_Red.png'
@@ -78,4 +68,31 @@ html_logo = './_images/Ul_Red.png'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 # html_static_path = ['_static']
+
 autodoc_mock_imports = ["pyvisa"]
+
+# -- Options for Latex output -------------------------------------------------
+# today = 'March 2, 2021'
+today_fmt = "Generated on %b %d, %Y"
+
+latex_engine = 'xelatex'
+latex_logo = './_images/Ul_Red.png'
+
+latex_elements = {
+    'fontenc': '\\usepackage{fontspec}',
+    'fontpkg': '''\
+                \\setmainfont{DejaVu Serif}
+                \\setsansfont{DejaVu Sans}
+                \\setmonofont{DejaVu Sans Mono}''',
+    'geometry': '\\usepackage[vmargin=2.5cm, hmargin=3cm]{geometry}',
+    'preamble': '''\
+                \\usepackage[titles]{tocloft}
+                \\cftsetpnumwidth {1.25cm}\\cftsetrmarg{1.5cm}
+                \\setlength{\\cftchapnumwidth}{0.75cm}
+                \\setlength{\\cftsecindent}{\\cftchapnumwidth}
+                \\setlength{\\cftsecnumwidth}{1.25cm}''',
+    'fncychap': '\\usepackage[Sonny]{fncychap}',
+    'printindex': '\\footnotesize\\raggedright\\printindex',
+    'classoptions': ',oneside',
+}
+

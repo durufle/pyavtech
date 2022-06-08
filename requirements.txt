@@ -1,11 +1,7 @@
-Sphinx
-sphinx-rtd-theme
+sphinx
 coverage
 wheel
 bump2version
 devpi-web
 devpi-client
 PyVISA
-
-
-
