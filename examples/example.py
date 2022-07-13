@@ -1,3 +1,9 @@
+import pathlib, sys, os
+FILE_ABS_PATH      = pathlib.Path(__file__).parent.resolve()
+LIB_PATH = os.path.normpath(os.path.normpath(FILE_ABS_PATH) + "/../")
+sys.path.append(LIB_PATH)
+
+
 from pyavtech.pyavr import PyAvr
 from importlib.metadata import version
 import sys
@@ -5,9 +11,9 @@ import logging
 
 VERSION = '0.1.0'
 
-USAGE = '''example: execute the avtech class example script
+USAGE = '''py: execute the avtech class py script
 Usage:
-    python example.py [options]
+    python py.py [options]
 
 Options:
     -h, --help              this help message.
@@ -15,11 +21,11 @@ Options:
     _l, --logging           enable logging.
     -a, --alias             avtech alias
     
-example:
-    python example.py -a LCT_GPIB_AVR_EMFI
+py:
+    python py.py -a LCT_GPIB_AVR_EMFI
         -> execute script using alias
         
-    python example.py -a GPIO0::8::INSTR
+    python py.py -a GPIO0::8::INSTR
         -> execute script using VISA address
         
 '''
@@ -53,6 +59,7 @@ def main(argv=None):
         sys.stderr.write(USAGE+"\n")
         return 1
 
+    alias='GPIB0::8::INSTR'
     if alias is None:
         sys.stderr.write("device alias or address is mandatory...\n")
         sys.stderr.write(USAGE+"\n")
@@ -62,7 +69,7 @@ def main(argv=None):
         logging.basicConfig(level=logging.INFO)
 
     device = PyAvr(alias)
-    print("Package version : {0}".format(version('pyavtech')))
+    #print("Package version : {0}".format(version('pyavtech')))
 
     if device.is_open:
         print("Identity     : {0}".format(device.get_identifier))
