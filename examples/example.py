@@ -11,9 +11,9 @@ import logging
 
 VERSION = '0.1.0'
 
-USAGE = '''py: execute the avtech class py script
+USAGE = '''example: execute the avtech class example script
 Usage:
-    python py.py [options]
+    python example.py [options]
 
 Options:
     -h, --help              this help message.
@@ -21,11 +21,11 @@ Options:
     _l, --logging           enable logging.
     -a, --alias             avtech alias
     
-py:
-    python py.py -a LCT_GPIB_AVR_EMFI
+example:
+    python example.py -a LCT_GPIB_AVR_EMFI
         -> execute script using alias
         
-    python py.py -a GPIO0::8::INSTR
+    python example.py -a GPIO0::8::INSTR
         -> execute script using VISA address
         
 '''
@@ -59,7 +59,7 @@ def main(argv=None):
         sys.stderr.write(USAGE+"\n")
         return 1
 
-    alias='GPIB0::8::INSTR'
+    #alias='GPIB0::8::INSTR'
     if alias is None:
         sys.stderr.write("device alias or address is mandatory...\n")
         sys.stderr.write(USAGE+"\n")
