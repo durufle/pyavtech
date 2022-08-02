@@ -161,7 +161,7 @@ class PyAvr:
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
 
-    def get_width(self):
+    def get_width(self, channel=""):
         """
         Return device width value
 
@@ -169,11 +169,11 @@ class PyAvr:
         """
         try:
             if self.__is_open:
-                return self.__device.query('pulse:width?').strip("\n")
+                return self.__device.query(f'pulse:width{channel}?').strip("\n")
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
 
-    def set_width(self, value: int):
+    def set_width(self, value: int, channel=""):
         """
         Set device width value
 
@@ -182,7 +182,7 @@ class PyAvr:
         """
         try:
             if self.__is_open:
-                return self.__device.write('pulse:width ' + str(value) + ' ns')
+                return self.__device.write(f'pulse:width{channel} {value} ns')
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
 
@@ -260,3 +260,50 @@ class PyAvr:
                 return self.__device.write('pulse:separation ' + str(value) + ' us')
         except visa.VisaIOError as err:
             self.__logger.warning("{}".format(err))
+            
+            
+    def get_trigger_source(self):
+        """
+        Get the trigger source 
+        
+        :return: trigger source
+        :rtype: str
+        """
+
+        try:
+            if self.__is_open:
+                return self.__device.query('TRIGger:SOURce?').strip("\n")
+        except visa.VisaIOError as err:
+            self.__logger.warning("{}".format(err))
+
+        
+    def set_trigger_source(self, value: str):
+        """
+        Set the trigger source 
+        
+        TRIGger:
+        :SOURce INTernal | EXTernal | MANual | HOLD | IMMediate
+        2.14.2. TRIGger:SOURce INTernal | EXTernal | MANual | HOLD | IMMediate
+        2.14.3. TRIGger:SOURce?
+        This command selects the trigger source for the instrument. Examples of valid commands are:
+        trig:sour INT - selects the internal clock as the
+        trigger source
+        trig:sour EXT - selects the external TTL trigger input
+        as the trigger source
+        trig:sour MAN - selects the "Single Pulse" pushbutton as
+        the trigger source. Each button press
+        produces one pulse.
+        trig:sour HOLD - selects no trigger source (triggering
+        stops)
+        trig:sour IMM - generates a single pulse, and then stops
+        triggering. This is the computercontrolled equivalent of the manual
+        "Single Pulse" pushbutton.
+        After power-up or the *RST command, this function defaults to "INTERNAL".
+        """
+
+        try:
+            if self.__is_open:
+                return self.__device.write('TRIGger:SOURce ' + str(value))
+        except visa.VisaIOError as err:
+            self.__logger.warning("{}".format(err))       
+        
