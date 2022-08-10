@@ -65,7 +65,6 @@ def main(argv=None):
         print("Delay        : {0}".format(device.get_delay()))
         print("Amplitude    : {0}".format(device.get_amplitude()))
         print("Output       : {0}".format(device.get_output()))
-        print("burst count  : {0}".format(device.get_burst_count()))
 
         device.close()
 

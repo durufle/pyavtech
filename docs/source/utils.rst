@@ -43,7 +43,6 @@ Example:
     > Delay        : 0.0000
     > Amplitude    : 0.0000
     > Output       : off
-    > burst count  : 1
 
     > Process finished with exit code 0
 
