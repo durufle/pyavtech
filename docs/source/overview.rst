@@ -51,11 +51,17 @@ else you have the ability to install it using wheel distribution package:
 
 Initialize Instrument
 ---------------------
-Once the Keysight environment is installed, launch the 'Keysight Connection Expert application'.
-Verify that your device is properly detected by the application. Select the device and give him an alias name.
-This alias name will be used by your script to connect to the device.
+Once the NI-VISA environment is installed, launch the 'NI MAX' application.
+Verify that your device is properly detected by the application (Devices and interfacing). If it's not display in the
+Network Devices list, ensure that LAN mde is enable at device level. Select Auto-detect of LAN Instrument.
+When your device is added into the Network Devices list equipment, its hostname can be used for connection.
 
-.. image:: ./_images/keysight_connect.png
+.. image:: ./_images/ni_max.png
+
+Keysight VISA can be also used in place of NI-VISA. In this case use Keysight Connection expert in order to
+register your devices, and associate an alias name.
+
+.. image:: ./_images/keysight_expert.png
 
 Package development
 ===================
@@ -133,11 +139,11 @@ Under root directory you can generate the wheel package and the documentation us
 
     $ python setup.py build_sphinx
 
-finaly you can build wheel package and documentation and the upload to the devpi server using:
+finally you can build wheel package and documentation and the upload to the devpi server using:
 
 .. code-block:: bash
 
-    $ devpi upload --format=bdist_whell --with-docs
+    $ devpi upload --format=bdist_wheel --with-docs
 
 
 .. warning::

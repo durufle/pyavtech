@@ -5,7 +5,6 @@ import logging
 class PyAvr:
     """
     Class to control an AVR device using VISA
-
     """
 
     __output = {
@@ -14,19 +13,15 @@ class PyAvr:
     }
 
     def __init__(self, alias):
-        self.__resources = None
-        self.__identifier = None
-
         self.__is_open = False
-        self.__logger = logging.getLogger(__name__)
+        self._logger = logging.getLogger(__name__)
 
         try:
-            self.__device = visa.ResourceManager().open_resource(alias)
-            self.__device.timeout = 1000
-            self.__identifier = self.__device.query('*IDN?').strip("\n")
+            self._device = visa.ResourceManager().open_resource(alias)
+            self._device.timeout = 1000
             self.__is_open = True
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
     def __del__(self):
         """ For safety, disable output"""
@@ -52,10 +47,10 @@ class PyAvr:
             if self.__is_open:
                 self.set_amplitude(0)
                 self.set_output('off')
-                self.__device.close()
+                self._device.close()
                 self.__is_open = False
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
     @property
     def is_open(self):
@@ -73,43 +68,41 @@ class PyAvr:
         Get device identifier
 
         :return: device identifier string
-        :rtype: str
         """
-        if self.__is_open:
-            return self.__identifier
+        try:
+            if self.__is_open:
+                return self._device.query('*IDN?').strip("\n")
+        except visa.VisaIOError as err:
+            self._logger.warning(f"{err}")
 
-    def get_output(self):
+    def get_output(self) -> str:
         """
         Get output state
 
         :return: output state ("on" or "off")
-        :rtype: str
         """
         try:
             if self.__is_open:
-                resp = self.__device.query('output?')
+                resp = self._device.query('output?')
                 return self.__get_output_state(str(resp).strip("\n"))
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
     def set_output(self, value: str):
         """
         Set output state
 
         :param value: output state ("on", "off")
-        :type value: str
-        :return:
-        :rtype:
         """
         try:
             if self.__is_open and value in ("on", "off"):
-                return self.__device.write('output ' + value)
+                return self._device.write('output ' + value)
             else:
-                self.__logger.warning("Device not open, or bad parameter...")
+                self._logger.warning("Device not open, or bad parameter...")
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-    def get_frequency(self):
+    def get_frequency(self) -> str:
         """
         Return device frequency value
 
@@ -118,9 +111,9 @@ class PyAvr:
         """
         try:
             if self.__is_open:
-                return self.__device.query('frequency?').strip("\n")
+                return self._device.query('frequency?').strip("\n")
         except visa.VisaIOError as err:
-            self._logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
     def set_frequency(self, value: int):
         """
@@ -132,122 +125,126 @@ class PyAvr:
         """
         try:
             if self.__is_open:
-                return self.__device.write('frequency ' + str(value) + ' Hz')
+                return self._device.write('frequency ' + str(value) + ' Hz')
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-    def get_delay(self):
+    def get_delay(self, channel=1) -> str:
         """
         Return device delay value
 
+        :param channel: channel number (default = 1)
         :return: pulse delay value
         """
         try:
             if self.__is_open:
-                return self.__device.query('pulse:delay?').strip("\n")
+                return self._device.query(f'pulse:delay{channel}?').strip("\n")
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-    def set_delay(self, value: int):
+    def set_delay(self, value: float, channel=1):
         """
         Set device delay value
 
         :param value: delay value string
-        :return:
+        :param channel: channel number (default = 1)
         """
         try:
             if self.__is_open:
-                return self.__device.write('pulse:delay ' + str(value) + ' ns')
+                return self._device.write(f'pulse:delay{channel} {value} ns')
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-    def get_width(self, channel=""):
+    def get_width(self, channel=1):
         """
         Return device width value
 
+        :param channel: channel number (default = 1)
         :return: pulse width value
         """
         try:
             if self.__is_open:
-                return self.__device.query(f'pulse:width{channel}?').strip("\n")
+                return self._device.query(f'pulse:width{channel}?').strip("\n")
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-    def set_width(self, value: int, channel=""):
+    def set_width(self, value: float, channel=1):
         """
         Set device width value
 
-        :param value: width value
-        :return:
+        :param value: width value in ns
+        :param channel: channel number (default = 1)
         """
         try:
             if self.__is_open:
-                return self.__device.write(f'pulse:width{channel} {value} ns')
+                cmd = f'pulse:width{channel} {value} ns'
+                result = self._device.write(cmd)
+                return result
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-    def get_amplitude(self):
+    def get_amplitude(self, channel=1):
         """
         Return device amplitude value
 
+        :param channel: channel number (default = 1)
         :return: amplitude value
         """
         try:
             if self.__is_open:
-                return self.__device.query('voltage?').strip("\n")
+                return self._device.query(f'voltage{channel}?').strip("\n")
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-    def set_amplitude(self, value):
+    def set_amplitude(self, value: int, channel=1):
         """
         Set device amplitude value
 
         :param value: amplitude value string
-        :return:
+        :param channel: channel number (default = 1)
         """
         try:
             if self.__is_open:
-                return self.__device.write('volt:ampl ' + str(value) + ' mV')
+                return self._device.write(f'volt:ampl{channel} {value} mV')
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-    def get_burst_count(self):
+    def get_burst_count(self) -> str:
         """
         Return burst count value
 
         :return: burst count value
-        :rtype: str
         """
         try:
             if self.__is_open:
-                return self.__device.query('pulse:count?').strip("\n")
+                value = self._device.query('pulse:count?').strip("\n")
+                return value
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
     def set_burst_count(self, value: int):
         """
         Set device burst count value
 
-        :return:
+        :param value: burst count number
         """
         try:
             if self.__is_open:
-                return self.__device.write('pulse:count ' + str(value))
+                return self._device.write('pulse:count ' + str(value))
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-    def get_burst_spacing(self):
+    def get_burst_spacing(self) -> str:
         """
         Return burst spacing time
 
         :return: burst spacing value in us
-        :rtype: str
         """
         try:
             if self.__is_open:
-                return self.__device.query('pulse:sep?').strip("\n")
+                return self._device.query('pulse:sep?').strip("\n")
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
     def set_burst_spacing(self, value: int):
         """
@@ -257,53 +254,32 @@ class PyAvr:
         """
         try:
             if self.__is_open:
-                return self.__device.write('pulse:separation ' + str(value) + ' us')
+                return self._device.write('pulse:separation ' + str(value) + ' us')
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
-            
-            
-    def get_trigger_source(self):
+            self._logger.warning(f"{err}")
+
+    def get_trigger_source(self) -> str:
         """
         Get the trigger source 
         
         :return: trigger source
-        :rtype: str
         """
 
         try:
             if self.__is_open:
-                return self.__device.query('TRIGger:SOURce?').strip("\n")
+                return self._device.query('TRIGger:SOURce?').strip("\n")
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))
+            self._logger.warning(f"{err}")
 
-        
     def set_trigger_source(self, value: str):
         """
         Set the trigger source 
-        
-        TRIGger:
-        :SOURce INTernal | EXTernal | MANual | HOLD | IMMediate
-        2.14.2. TRIGger:SOURce INTernal | EXTernal | MANual | HOLD | IMMediate
-        2.14.3. TRIGger:SOURce?
-        This command selects the trigger source for the instrument. Examples of valid commands are:
-        trig:sour INT - selects the internal clock as the
-        trigger source
-        trig:sour EXT - selects the external TTL trigger input
-        as the trigger source
-        trig:sour MAN - selects the "Single Pulse" pushbutton as
-        the trigger source. Each button press
-        produces one pulse.
-        trig:sour HOLD - selects no trigger source (triggering
-        stops)
-        trig:sour IMM - generates a single pulse, and then stops
-        triggering. This is the computercontrolled equivalent of the manual
-        "Single Pulse" pushbutton.
-        After power-up or the *RST command, this function defaults to "INTERNAL".
+
+        :param value: trigger source
         """
 
         try:
             if self.__is_open:
-                return self.__device.write('TRIGger:SOURce ' + str(value))
+                return self._device.write('TRIGger:SOURce ' + str(value))
         except visa.VisaIOError as err:
-            self.__logger.warning("{}".format(err))       
-        
+            self._logger.warning(f"{err}")
