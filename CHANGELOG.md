@@ -1,5 +1,10 @@
 **unreleased**
 
+**v0.4.0**
+
+- Update command according to AVRK pulser: channel management
+- Update documentation: change brand, theme and examples
+
 **v0.3.0**
 
 - Add avr_cli line command interpreter
