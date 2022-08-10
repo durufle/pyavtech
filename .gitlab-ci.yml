@@ -29,15 +29,15 @@ builds:
     script:
     - echo "Generate package and sphinx documentation"
     - python setup.py bdist_wheel build_sphinx
-    artifacts:
-        name: $CI_PROJECT_NAME-$CI_JOB_STAGE-$CI_JOB_ID-$CI_COMMIT_REF_NAME
-        paths:
-            - ./dist
-            - ./build/sphinx/html
 
 production:
     stage: deploy
     script:
-    - echo "deploy phase"
+    - echo "publish revision"
+    - export PYTHONPATH="$PWD"
+    - bash -c "devpi use http://$DEVPI_HOST:3141/$DEVPI_INDEX"
+    - bash -c "devpi login $DEVPI_LOGIN --password=$DEVPI_PASSWORD"
+    - bash -c "devpi upload --format bdist_wheel"
+
     only:
     - tags
