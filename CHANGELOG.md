@@ -1,5 +1,7 @@
 **unreleased**
 
+**v0.5.0**
+
 - remove __del__
 - replace methods to getter and setter (identifier, output, frequency, burst_count, burst_spacing, trigger_source)
 
