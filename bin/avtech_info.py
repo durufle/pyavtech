@@ -59,12 +59,12 @@ def main(argv=None):
     print("pyavr package version : {0}".format(version("pyavtech")))
 
     if device.is_open:
-        print("Identity     : {0}".format(device.get_identifier))
-        print("Frequency    : {0}".format(device.get_frequency()))
-        print("Width        : {0}".format(device.get_width()))
-        print("Delay        : {0}".format(device.get_delay()))
-        print("Amplitude    : {0}".format(device.get_amplitude()))
-        print("Output       : {0}".format(device.get_output()))
+        print(f"Identity     : {device.identifier}")
+        print(f"Frequency    : {device.frequency}")
+        print(f"Width        : {device.get_width()}")
+        print(f"Delay        : {device.get_delay()}")
+        print(f"Amplitude    : {device.get_amplitude()}")
+        print(f"Output       : {device.output}")
 
         device.close()
 

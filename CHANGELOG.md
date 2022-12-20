@@ -1,5 +1,8 @@
 **unreleased**
 
+- remove __del__
+- replace methods to getter and setter (identifier, output, frequency, burst_count, burst_spacing, trigger_source)
+
 **v0.4.0**
 
 - Update command according to AVRK pulser: channel management

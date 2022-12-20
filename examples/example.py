@@ -79,31 +79,31 @@ def main(argv=None):
 
     if device.is_open:
         # Common API
-        print("Identity     : {0}".format(device.get_identifier))
-        print("Frequency    : {0}".format(device.get_frequency()))
+        print("Identity     : {0}".format(device.identifier))
+        print("Frequency    : {0}".format(device.frequency))
         print("Amplitude    : {0}".format(device.get_amplitude()))
 
         # Output command
-        print("Output           : {0}".format(device.get_output()))
+        print("Output           : {0}".format(device.output))
         print("Set output on...")
-        device.set_output("on")
-        print("Output           : {0}".format(device.get_output()))
+        device.output="on"
+        print("Output           : {0}".format(device.output))
         print("Set output off...")
-        device.set_output("off")
-        print("Output           : {0}".format(device.get_output()))
+        device.output="off"
+        print("Output           : {0}".format(device.output))
         print("Set output bad...")
-        device.set_output("bad")
+        device.output = "bad"
 
         # Trigger
-        print("Trigger source   : {0}".format(device.get_trigger_source()))
+        print("Trigger source   : {0}".format(device.trigger_source))
 
         if alias == "MRS_LAN_AVR_EMFI":
             print("---------------------------------------------------------------------------------------------------")
             print(f"Alias = {alias}")
             print("---------------------------------------------------------------------------------------------------")
             # burst
-            print("spacing          : {0}".format(device.get_burst_spacing()))
-            print("burst count      : {0}".format(device.get_burst_count()))
+            print("spacing          : {0}".format(device.burst_spacing))
+            print("burst count      : {0}".format(device.burst_count))
 
             # Width command
             print("Width            : {0}".format(device.get_width()))
@@ -124,11 +124,11 @@ def main(argv=None):
 
             # Frequency command
             print("Set Frequency to 5 Hz...")
-            device.set_frequency(5)
-            print("Frequency        : {0}".format(device.get_frequency()))
+            device.frequency= 5
+            print("Frequency        : {0}".format(device.frequency))
             print("Set Frequency to 2000 Hz...")
-            device.set_frequency(2000)
-            print("Frequency        : {0}".format(device.get_frequency()))
+            device.frequency = 2000
+            print("Frequency        : {0}".format(device.frequency))
 
             # Amplitude command
             print("Set Amplitude to 1000 mV...")

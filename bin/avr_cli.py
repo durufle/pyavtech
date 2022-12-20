@@ -25,7 +25,7 @@ class AvrShell(cmd.Cmd):
     def do_identity(self, arg):
         """ get device identity: identity """
         if self.device:
-            print("  Identity        : " + self.device.get_identifier)
+            print(f"  Identity        : {self.device.identifier}")
 
     def do_amplitude(self, arg):
         """ get / set device power in mA: power , power [value] """
@@ -36,18 +36,18 @@ class AvrShell(cmd.Cmd):
                 except Exception as e:
                     print("  Exception occur : {0}".format(e))
             else:
-                print("  Amplitude value : " + self.device.get_amplitude())
+                print(f"  Amplitude value : {self.device.get_amplitude()}")
 
     def do_frequency(self, arg):
         """ get / set device frequency (hz): frequency , frequency [value] """
         if self.device:
             if arg:
                 try:
-                    self.device.set_frequency(int(arg))
+                    self.device.frequency = int(arg)
                 except Exception as e:
                     print("  Exception occur : {0}".format(e))
             else:
-                print("  Frequency       : " + self.device.get_frequency())
+                print(f"  Frequency       : {self.device.frequency}")
 
     def do_delay(self, arg):
         """ get / set device delay (ns): delay , delay [value] """
@@ -58,7 +58,7 @@ class AvrShell(cmd.Cmd):
                 except Exception as e:
                     print("  Exception occur : {0}".format(e))
             else:
-                print("  Delay           : " + self.device.get_delay())
+                print(f"  Delay           : {self.device.get_delay()}")
 
     def do_width(self, arg):
         """ get / set device width (ns) : width , width [value] """
@@ -69,40 +69,40 @@ class AvrShell(cmd.Cmd):
                 except Exception as e:
                     print("  Exception occur : {0}".format(e))
             else:
-                print("  Width           : " + self.device.get_width())
+                print(f"  Width           : {self.device.get_width()}")
 
     def do_output(self, arg):
         """ get / set device output: output , output ["on" / "off"] """
         if self.device:
             if arg:
                 try:
-                    self.device.set_output(arg)
+                    self.device.output = arg
                 except Exception as e:
                     print("  Exception occur : {0}".format(e))
             else:
-                print("  Output          : " + self.device.get_output())
+                print(f"  Output          : { self.device.output}")
 
     def do_count(self, arg):
         """ get / set device burst count : count , count [value] """
         if self.device:
             if arg:
                 try:
-                    self.device.set_burst_count(int(arg))
+                    self.device.burst_count = int(arg)
                 except Exception as e:
-                    print("  Exception occur : {0}".format(e))
+                    print(f"  Exception occur : {e}")
             else:
-                print("  Burst count     : " + self.device.get_burst_count())
+                print(f"  Burst count     : {self.device.burst_count}")
 
     def do_space(self, arg):
         """ get / set device burst space : space , space [value] """
         if self.device:
             if arg:
                 try:
-                    self.device.set_burst_spacing(int(arg))
+                    self.device.burst_spacing = int(arg)
                 except Exception as e:
-                    print("  Exception occur : {0}".format(e))
+                    print(f"  Exception occur : {0}".format(e))
             else:
-                print("  Burst space     : " + self.device.get_burst_spacing())
+                print(f"  Burst space     : {self.device.burst_spacing}")
 
     def do_exit(self, arg):
         """ Close connection with the device and exit..."""
