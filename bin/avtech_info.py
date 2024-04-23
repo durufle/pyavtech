@@ -32,7 +32,7 @@ def main(argv=None):
         argv = sys.argv[1:]
     try:
         opts, args = getopt.gnu_getopt(argv, 'hva:', ['help', 'version', 'alias='])
-        alias = None
+        alias = 'TCPIP0::10.67.0.35::inst0::INSTR'
 
         for o, a in opts:
             if o in ('-h', '--help'):
@@ -56,7 +56,6 @@ def main(argv=None):
         return 1
 
     device = PyAvr(alias)
-    print("pyavr package version : {0}".format(version("pyavtech")))
 
     if device.is_open:
         print(f"Identity     : {device.identifier}")

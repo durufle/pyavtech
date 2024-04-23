@@ -1,6 +1,4 @@
-sphinx
-coverage
-wheel
 bump2version
-devpi-client==5.2.3
 PyVISA
+gooey
+pyyaml
