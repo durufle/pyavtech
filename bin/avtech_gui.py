@@ -29,11 +29,10 @@ def parameters(device):
     parser = GooeyParser(description='AVTECH Pulse generator GUI')
     parser.add_argument('-t', '--trigger', choices=['INT', 'EXT', 'MAN', 'HOL', 'IMM'], default='INT',
                         help="Pulse generator trigger mode", )
-    parser.add_argument('-f', '--frequency', help="Pulse generator frequency value in Hz", widget='DecimalField', gooey_options={'increment': 100})
-
+    parser.add_argument('-f', '--frequency', help="Pulse generator frequency value in Hz", widget='DecimalField')
     parser.add_argument('-o', '--output', choices=['on', 'off'], default='off', help="Pulse generator output state")
-    parser.add_argument('-b', '--burst', help="Pulse generator burst count number")
-    parser.add_argument('-s', '--spacing', help="Pulse generator burst count spacing")
+    parser.add_argument('-b', '--burst', default=device.burst_count, help="Pulse generator burst count number")
+    parser.add_argument('-s', '--spacing', default=device.burst_spacing, help="Pulse generator burst count spacing")
 
     parser.add_argument('-c', '--channel', default=1, help="Select active channel")
     group = parser.add_argument_group('Channel parameters', gooey_options={'show_border': True})
@@ -45,6 +44,12 @@ def parameters(device):
     # set all parameters
     device.frequency = args.frequency
     device.trigger_source = args.trigger
+    device.output = args.output
+    device.burst_count = args.burst
+    device.burst_spacing = args.spacing
+    device.set_delay(value=args.delay, channel=args.channel)
+    device.set_amplitude(value=args.voltage, channel=args.channel)
+    device.set_width(value=args.width, channel=args.channel)
 
 
 if __name__ == '__main__':
